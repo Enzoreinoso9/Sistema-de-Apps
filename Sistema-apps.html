@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-color: #092635;
+        }
+
+        #app-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .stars-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .star {
+            color: #FFD700;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app-container">
+        <script>
+            class Apps {
+                constructor(nombre, cantidad, puntuacion, peso, imagen, estrellas) {
+                    this.nombre = nombre;
+                    this.cantidad = cantidad;
+                    this.puntuacion = puntuacion;
+                    this.peso = peso;
+                    this.imagen = imagen; 
+                    this.estrellas = estrellas
+                }
+
+                verInfo() {
+                    
+                    document.write(
+                        `<div id="app-details">
+                            <img src="img/${this.imagen}" alt="${this.nombre}">
+
+                            <h2>${this.nombre}</h2>
+                            <div><b>Cantidad de Descargas:</b> ${this.cantidad}</div>
+                            <div><b>Puntuación:</b> ${this.generarEstrellas()}</div>
+                            <div><b>Peso:</b> ${this.peso}</div>
+                        </div>`
+                    );
+                }
+
+                instalar() {
+                    alert(`La aplicación se está instalando.`);
+                }
+
+                abrir() {
+                    alert(`Abriendo aplicación.`);
+                }
+
+                cerrar() {
+                    alert(`Cerrando aplicación.`);
+                }
+
+                desinstalar() {
+                    alert(`La aplicación se está desinstalando.`);
+                }
+
+                // Método para generar estrellas basado en la puntuación
+                generarEstrellas() {
+                    const stars = Array.from({ length: 5 }, (_, index) => {
+                        return index < Math.round(this.estrellas) ? '★' : '☆';
+                    });
+                    return stars.map(star => `<span class="star">${star}</span>`).join('');
+                }
+            }
+
+            const angryBirds = new Apps("Angry Birds", "Más de 10,000,000 descargas.", 4.6, "134 MB", "angryBirds.jpg", 5);
+            const freeFire = new Apps("Free Fire", "Más de 1,000,000,000 descargas.", 4.2, "422 MB", "freeFire.webp", 4);
+            const nbaMobile = new Apps("NBA Mobile", "Más de 100,000,000 descargas.", 4.3, "85.77 MB", "nbaMobile.jpg", 4);
+
+            const app = prompt("¿Qué aplicación deseas ver?").toLowerCase(); // Convertimos a minúsculas para ser insensible a mayúsculas y minúsculas
+
+            let selectedApp;
+
+            switch (app) {
+                case "angry birds":
+                    selectedApp = angryBirds;
+                    break;
+                case "free fire":
+                    selectedApp = freeFire;
+                    break;
+                case "nba mobile":
+                    selectedApp = nbaMobile;
+                    break;
+                default:
+                    alert("La aplicación seleccionada no está disponible.");
+            }
+
+            if (selectedApp) {
+                selectedApp.instalar();
+                selectedApp.verInfo();
+            }
+        </script>
+    </div>
+</body>
+
+</html>
